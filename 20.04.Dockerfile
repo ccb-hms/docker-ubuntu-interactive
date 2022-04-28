@@ -152,9 +152,11 @@ RUN ARCH=$(dpkg --print-architecture) \
 	&& DOWNLOAD_FILE=s6-overlay-noarch.tar.xz \
     && wget -P /tmp/ "https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/${DOWNLOAD_FILE}" \
     && tar -C / -Jxpf /tmp/${DOWNLOAD_FILE} \
+	&& rm /tmp/${DOWNLOAD_FILE} \
 	&& DOWNLOAD_FILE=s6-overlay-${ARCH}.tar.xz \
     && wget -P /tmp/ "https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/${DOWNLOAD_FILE}" \
-    && tar -C / -Jxpf /tmp/${DOWNLOAD_FILE}
+    && tar -C / -Jxpf /tmp/${DOWNLOAD_FILE} \
+	&& rm /tmp/${DOWNLOAD_FILE} 
 
 ENV PATH "${PATH}:/command" 
 
